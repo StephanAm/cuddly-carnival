@@ -1,47 +1,180 @@
-service1:
-    downstream1: "someurl"
-    downstream2: "someurl"
-    service2: "someurl"
-    downstream3: "someurl"
-    downstream4: "someurl"
-service2:
-    downstream1: "someurl"
-    downstream2: "someurl"
-    service1: "someurl"
-    downstream5: "someurl"
-    downstream6: "someurl"
-service3:
-    downstream1: "someurl"
-    downstream2: "someurl"
-    service1: "someurl"
-    service2: "someurl"
-    downstream7: "someurl"
-    downstream8: "someurl"
-service4:
-    downstream1: "someurl"
-    downstream2: "someurl"
-    service1: "someurl"
-    service2: "someurl"
-    downstream8: "someurl"
-    downstream9: "someurl"
-service5:
-    downstream1: "someurl"
-    downstream2: "someurl"
-    service1: "someurl"
-    service2: "someurl"
-    downstream9: "someurl"
-    downstream10: "someurl"
-service6:
-    downstream1: "someurl"
-    downstream2: "someurl"
-    service1: "someurl"
-    service2: "someurl"
-    downstream10: "someurl"
-    downstream11: "someurl"
-service7:
-    downstream1: "someurl"
-    downstream2: "someurl"
-    service1: "someurl"
-    service2: "someurl"
-    downstream10: "someurl"
-    downstream12: "someurl"
+allergies-api:
+  saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile
+  consent: http://dhtapssrv.discsrv.co.za:7003/channel-consent/spring-ws/channelConsent
+  entities-core: http://dhdspaweb01/entities-service-ws/core.wsdl
+
+authorizations-api:
+  saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile/
+  gateway-authorisation-service: http://dhtdcsa:80/AuthorisationWebService/GatewayAuthorisationService
+  auth-quicksearch: http://dhtdcsa:9002/auth-quicksearch
+  member-details-api-client: http://member-details-api/member-details-api
+  electronic-auth-web-service: http://dhtdcsa/ElectronicAuthWeb/service
+  auth-lookup-decoder: http://dhtdcsa/decoderNE
+  consent: http://dhtapssrv.discsrv.co.za:7003/channel-consent/spring-ws/channelConsent
+  netcare-preadmission-api: netcare-service-https/Auth/PassThru
+  das-https-proxy-url: http://dastest.discsrv.co.za:7011/das-zuul-proxy-internal/api/das-zuul-proxy-https/
+
+benefits-used-api:
+  claimService: http://dhtcpsa.discsrv.co.za/cps/services/claims?WSDL
+  saProfile: http://dhtapssrv.discsrv.co.za:7003/saprofile
+
+bms-api:
+  bms-gateway: http://dhtbmslb.discsrv.co.za:8009/bms-gateway
+  bms-retrieve-authorisations: http://dhtbmslb.discsrv.co.za:8009/bms-gateway/api/retrieve/authorisations
+  bms-create-enrollment-basket: http://dhtbmslb.discsrv.co.za:8009/bms-gateway/outofhospital/request/enrollmentbasket
+  saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile/
+  discovery-maps-practice-details: http://dhtinter03:7008/discoverymaps-msrv/practiceDetails
+  entities.service.providers: http://dhtcorpentities/entities-service-ws/core.wsdl
+  providers.service.providers: http://dhtprov03:7005/provider/client/services/ProviderClientServices.wsdl
+  consent: http://dhtapssrv.discsrv.co.za:7003/channel-consent/spring-ws/channelConsent
+  solr-chs: http://dhtdmx02:8080/solr
+  solr-aps: http://dhtsolr.discsrv.co.za:8983/solr/
+  profile: http://dhtapssrv:7003/profile/profile-ws/portal/
+
+breast-cancer-api:
+  saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile
+  bcrcaUri: http://dhtchsapache01/bcra
+
+care-team-api:
+  saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile/
+  consent: http://dhtapssrv.discsrv.co.za:7003/channel-consent/spring-ws/channelConsent
+  gateway: http://htap-gateway-api/healthtap-gateway-server
+  htap: https://next-enterpriseqa.healthtap.com/api/v2.1
+  htap.admin: https://next-enterpriseqa.healthtap.com/api/admin
+  ehr: http://dhtchsapache01/test/ehr/ehrService/
+
+care-team-external-api:
+  care-team-api: http://care-team-api/care-team-api
+  htap-gateway-api: http://htap-gateway-api/healthtap-gateway-server
+  consent-api: http://consent-api/consent-api
+  disclaimer-api: http://disclaimer-api
+  cdr-core: http://das-cdr-core
+  member-details-api: http://member-details-api/member-details-api
+  oauth-user-details: http://dhtchsapache01/oauth/token
+  # saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile
+  #   oauth: http://dhtchsapache01/oauth/token?username=dasops&password=Espresso01AndMilk&grant_type=password
+  #   dm:
+  #     forms: http://dhtchsapache01/disease-management
+  # workflow:
+  #   endpoint:
+  #     base: http://dhddasweb01.discsrv.co.za:7011/das-zuul-proxy-https/workflow-https
+  #     service-path:
+  #       core-api: /workflow-webservices/wfws
+  #       search-api: /wf-search-webservices/searchws
+
+case-manager-api:
+  member-details-api-client: http://member-details-api/member-details-api
+  das-filestore-api: http://das-filestore/das-filestore
+  saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile
+  # datasource:
+  #   disc:
+  #     url: jdbc:oracle:thin:@dhdevdb:1525:DISC
+  #     username: dhdecs
+  #     password: cwdecst
+  #     driverClassName: oracle.jdbc.OracleDriver
+
+cib-api:
+  ehr-api: http://ehr-api/ehr-api
+  decoder-api: http://decoder-api
+  member-details-api: http://member-details-api/member-details-api
+  saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile
+  consent: http://dhtapssrv.discsrv.co.za:7003/channel-consent/spring-ws/channelConsent
+  cib-webservice: http://DHTDCSA/cib/ChronicWebService?WSDL
+
+claims-api:
+  workflowApi: http://workflow-api
+  schemeConfigurationApi: http://scheme-configuration-api/scheme-configuration-api
+  manageYourPlanControllerApi: http://health-plans-api
+  notification-api: http://das-notification-api/notification-api
+  healthXmlNamespace: http://hpremc.discoveryhealth.co.za:8080/webservice/za/co/discovery/health/admin/XmlService
+  claimService: http://dhtcpsa.discsrv.co.za/cps/services/claims?WSDL
+  notificationFileRegistry: http://ttempman:7035/notification-file/spring-ws/fileRegistryService.wsdl
+  notificationView: http://tnotifsrv:6041/notification/ws/NotifWs?WSDL
+  notification: http://tnotifsrv:6041/notification/ws/request/NotifRequest?WSDL
+  saProfile: http://dhtapssrv.discsrv.co.za:7003/saprofile
+  chronicsAuthorization: http://dhtdcsa.discsrv.co.za/AuthorisationWebService/GatewayAuthorisationService?WSDL
+  authorisationService: http://dhtdcsa.discsrv.co.za/AuthorisationWebService/GatewayAuthorisationService?WSDL
+  providersService: http://dhtprov:7001/webservice/services/providers?WSDL
+  healthXmlService: http://dhtadmin.discsrv.co.za:8280/webservice/za/co/discovery/health/admin/XmlService?WSDL
+
+cmm-api:
+  saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile/
+  consent: http://dhtapssrv.discsrv.co.za:7003/channel-consent/spring-ws/channelConsent
+  profile: http://dhtapssrv:7003/profile/profile-ws/portal/
+  providers: http://dhtprov03:7005/provider/client/services/ProviderClientServices
+  notifications: http://dhcaapps:6041/notification/ws/request/NotifRequest
+  oauth: http://dhtchsapache01/oauth/token
+
+consent-api:
+  saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile/
+  consent: http://dhtapssrv.discsrv.co.za:7003/channel-consent/spring-ws/channelConsent
+  profile: http://dhtapssrv:7003/profile/profile-ws/portal/
+  otp: http://dhtapssrv:7003/otp/spring-ws/otp
+  notification: http://das-notification-api/notification-api
+  member-details-api: http://member-details-api/member-details-api
+  providerDetails: http://provider-details-api/provider-details-api
+  entities: http://DHTCORPENTITIES/entities-service-ws/core
+  notifications-core: http://das-notifications-core
+  d2hp-member-info: http://dhtd2hplb.discsrv.co.za/member-info
+  d2hp-provider-info: http://dhtd2hplb.discsrv.co.za/provider-info
+  d2hp-oauth-user-details: http://dhtdaslin01:6968/d2hp/authorisation/oauth/token
+
+contributions-calculator-api:
+  contributionCalculator: http://dhtadmin:8280/premium-calculator-ws/service/PremiumCalculatorService.wsdl
+  saProfile: http://dhtapssrv.discsrv.co.za:7003/saprofile
+  adminBillingGeneral: http://dhtadmin:8280/admin-general-ws/service
+
+# cpg-api:
+#   dataSource:
+#     driverClassName: oracle.jdbc.OracleDriver
+#     password: ywpxjbhm6ea8y
+#     url: jdbc:oracle:thin:@dhtest:1523:DISC
+#   healthidProviders: http://dhtdas01:7001/solr/providers/
+#   tibco:
+#     jms:
+#       serverUrl: tcp://dhttemsclst:7222
+#   crs:
+#     elastic:
+#       search:
+#         url: http://dhtcrs:9000/crs-zuul/crs-elastic
+
+# cpg-msrv-api:
+#   url:
+#     cpg: http://dhtcrs:9000/crs-zuul/cpg-api
+
+das-admin-dashboard:
+  pathways: http://htap-pathways-api/htap-pathways-api
+  synchronizer: http://htap-synchronizer-api/synchronizer-api
+  user: http://htap-user-api/htap-user-api
+  careTeam : http://care-team-api/care-team-api
+  das-service-list: http://das-service-list/das-service-list
+  planMatrix : http://plan-matrix-core/plan-matrix-core
+  encWorkflow: http://enc-core/enc-core
+  dataExporter: http://htap-lookup-data-exporter-api/lookup-data-exporter
+  htapGatewayApi : http://htap-gateway-api/healthtap-gateway-server
+  cpg : http://cpg-api/cpg-api
+  notification: http://das-notification-api/notification-api
+  disease-management-api: http://dhtchsapache01/disease-management
+#   ldap:
+#     domain: discovery.co.za
+#     url: ldap://adldap.discovery.holdings.co.za:389
+#   oauth-user-details:
+#     url: http://dhtchsapache01/oauth/token
+
+# das-boot-admin:
+#   ldap:
+#     url: ldap://adldap.discovery.holdings.co.za:389
+
+das-cdr-core:
+  oauth-user-details: http://dhtchsapache01/oauth/token
+#   cdr:
+#     arrivals: http://dhtchsapache01/cdr/arrivals
+#     gateway: http://dhtchsapache01/cdr/gateway
+#     assessment: http://dhtchsapache01/cdr/assessment
+#     results: http://dhtchsapache01/cdr/assessment/results
+#   reports: http://dhtchsapache01/reporting-msrv
+
+# das-chat-api:
+#   endpoint:
+#     saprofile: http://dhtapssrv.discsrv.co.za:7003/saprofile
+#     consent: http://dhtapssrv.discsrv.co.za:7003/channel-consent/spring-ws/channelConsent
