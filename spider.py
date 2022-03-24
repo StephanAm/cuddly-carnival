@@ -1,8 +1,10 @@
-from fileinput import filename
 import yaml
 import numpy
 import networkx as nx
 import matplotlib.pyplot as plt
+from collections import Iterable
+
+
 
 
 def loadFromYaml(filename):
@@ -11,6 +13,7 @@ def loadFromYaml(filename):
             source = yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             print(exc)
+            raise exc
     return source
 
 def createServiceList(source):
@@ -49,27 +52,60 @@ def createGraph(matrix, serviceList):
     G = nx.relabel_nodes(G, lables)
     return G
 
-def drawFocused(G, focus,fileName=None):
-    innerShell = [focus]
+def drawFocused(G, focus, filename=None):
+    labelText = dict([(i, "\n".join(i.split('-'))) for i in G.nodes()])
+    innerShell = focus if isinstance(focus, Iterable) else [focus]
     outerShell = list(G.nodes())
-    outerShell.remove(focus)
-    pos = nx.shell_layout(G, [innerShell, outerShell])
-    draw(G, pos,fileName=fileName)
+    for node in focus:
+        outerShell.remove(node)
+    # pos = nx.shell_layout(G, [innerShell, outerShell])
+    pos = nx.bipartite_layout(G, innerShell)
+    draw(G, pos, labelText = labelText, filename=filename)
 
-def draw(G, pos, labelText = None, fileName=None):
+def draw(G, pos, labelText = None, filename=None):
     plt.cla()
     plt.clf()
     plt.axis('equal')
-    nx.draw(G,pos=pos,node_size=3000,node_shape='s')
-    nx.draw_networkx_labels(G,pos,labelText,font_size=8)
-    if fileName is None:
+    nx.draw(G,pos=pos,node_size=200,node_shape='o')
+    nx.draw_networkx_labels(G,pos,labelText,font_size=1)
+    if filename is None:
         plt.show()        
         input()
     else:
-        plt.savefig(fname=fileName,dpi=200,transparent=True,bbox_inches='tight')
+        plt.savefig(fname=filename,dpi=2000,transparent=True,bbox_inches='tight',)
 
-def getSubGraph(G, node):
+def getEdgesForNode(G,node):
     ei = list(G.in_edges(node, keys=True))
     eo = list(G.out_edges(node, keys=True))
     edges = ei+eo
+    return edges
+
+def getSubGraph(G, focus):
+    if not isinstance(focus, Iterable): focus = (focus,)
+    edges=[]
+    for node in focus:
+        edges += getEdgesForNode(G, node)
     return G.edge_subgraph(edges)
+
+
+def _drawSubGraphs(G, focus, filename=None):
+    try:
+        Gs = getSubGraph(G,focus)
+
+        drawFocused(Gs, focus, filename=filename)
+    except Exception as x:
+        print(f"couldn't process {focus}: {x}")
+
+
+def drawSubGraphs(G, batchSize, outputDir = None):
+    serviceList = list(G.nodes())
+    count = 0
+    while len(serviceList) > 10:
+        focus = serviceList[:10]
+        serviceList = serviceList[10:]
+        _drawSubGraphs(G,focus=focus, filename=f'{outputDir}/{count}.png')
+        count += 1
+
+    focus = serviceList
+    _drawSubGraphs(G,focus=focus,filename=f'{outputDir}/{count}.png')
+    
